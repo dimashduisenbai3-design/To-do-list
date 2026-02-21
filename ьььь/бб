@@ -1,0 +1,41 @@
+const express = require('express');
+const app = express();
+
+// Сервер JSON форматты түсінуі үшін керек
+app.use(express.json());
+
+// Уақытша деректер қоры (массив)
+let tasks = [
+    { id: 1, title: "Сабақ оқу", completed: false },
+    { id: 2, title: "GitHub-қа код салу", completed: false }
+];
+
+// --- GET СҰРАУЛАРЫ ---
+
+// 1. Барлық тапсырмаларды алу
+app.get('/tasks', (req, res) => {
+    res.json(tasks);
+});
+
+// 2. Жеке бір тапсырманы ID арқылы алу
+app.get('/tasks/:id', (req, res) => {
+    const task = tasks.find(t => t.id === parseInt(req.params.id));
+    if (!task) return res.status(404).send('Тапсырма табылмады!');
+    res.json(task);
+});
+
+// --- POST СҰРАУЫ ---
+
+// Жаңа тапсырма қосу
+app.post('/tasks', (req, res) => {
+    const newTask = {
+        id: tasks.length + 1,
+        title: req.body.title, // Postman-нан келетін мән
+        completed: false
+    };
+    tasks.push(newTask);
+    res.status(201).json(newTask);
+});
+
+const PORT = 3000;
+app.listen(PORT, () => console.log(`Сервер http://localhost:${PORT} портында қосылды`));
