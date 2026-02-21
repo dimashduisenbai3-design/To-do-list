@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Задачи — TaskFlow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Nunito:wght@400;500;600;700&subset=cyrillic&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <div class="app">
+
+    <header class="header">
+      <div class="header-top">
+        <div class="logo">
+          <span class="logo-dot"></span>
+          TaskFlow
+        </div>
+        <div class="task-count-badge">
+          <span id="task-count">0</span> задач
+        </div>
+      </div>
+      <h1 class="headline">Список <em>задач</em></h1>
+    </header>
+
+    <section class="add-section">
+      <form id="add-form" class="add-form">
+        <div class="fields">
+          <div class="field-group">
+            <label for="title">Название задачи</label>
+            <input id="title" name="title" type="text" placeholder="Что нужно сделать?" autocomplete="off" required />
+          </div>
+          <div class="field-group field-small">
+            <label for="user_id">ID пользователя</label>
+            <input id="user_id" name="user_id" type="number" placeholder="1" min="1" required />
+          </div>
+          <div class="field-group field-small">
+            <label for="category_id">ID категории</label>
+            <input id="category_id" name="category_id" type="number" placeholder="1" min="1" />
+          </div>
+        </div>
+        <button type="submit" class="btn-add">
+          <span>+</span> Добавить
+        </button>
+      </form>
+    </section>
+
+    <section class="tasks-section">
+      <div class="tasks-header">
+        <span class="section-label">Все задачи</span>
+        <div class="filter-tabs">
+          <button class="filter-btn active" data-filter="all">Все</button>
+          <button class="filter-btn" data-filter="0">Активные</button>
+          <button class="filter-btn" data-filter="1">Выполненные</button>
+        </div>
+      </div>
+
+      <div id="task-list" class="task-list">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Загрузка...</p>
+        </div>
+      </div>
+
+      <div id="empty-state" class="empty-state hidden">
+        <div class="empty-icon">✦</div>
+        <p>Задач нет</p>
+        <span>Добавьте новую задачу</span>
+      </div>
+    </section>
+
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
